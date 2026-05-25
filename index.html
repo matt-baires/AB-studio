@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AB Estudio — Fotografía y Video</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset ─────────────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    /* ─── Tokens ─────────────────────────────────────────────── */
+    :root {
+      --midnight:    #000000;
+      --cloud:       #ffffff;
+      --slate-dust:  #f5f5f0;
+      --steel-gray:  #202020;
+      --mist-gray:   #c0c0c0;
+      --charcoal:    #333333;
+      --ash:         #999999;
+      --light-ash:   #cccccc;
+      --cadet:       #b3b3b3;
+
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans:  'Inter', system-ui, sans-serif;
+
+      --r-btn:   9999px;
+      --r-badge: 9999px;
+      --r-card:  10px;
+
+      --shadow-btn:  rgba(0,0,0,.15) 0 4px 20px 0;
+      --shadow-elev: rgba(0,0,0,.35) 0 10px 30px 0, rgba(255,255,255,.08) 0 1px 0 0 inset;
+    }
+
+    /* ─── Base ───────────────────────────────────────────────── */
+    body {
+      background: var(--midnight);
+      color: var(--cloud);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Typography ─────────────────────────────────────────── */
+    .t-display-xl {
+      font-family: var(--font-serif); font-weight: 500;
+      font-size: clamp(54px, 9vw, 115px);
+      line-height: 1; letter-spacing: -.05em;
+    }
+    .t-display-lg {
+      font-family: var(--font-serif); font-weight: 500;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1; letter-spacing: -.025em;
+    }
+    .t-display {
+      font-family: var(--font-serif); font-weight: 500;
+      font-size: 32px; line-height: 1.2; letter-spacing: -.025em;
+    }
+    .t-display-sm {
+      font-family: var(--font-serif); font-weight: 500;
+      font-size: 22px; line-height: 1.2;
+    }
+    .t-heading {
+      font-family: var(--font-sans); font-weight: 500;
+      font-size: 18px; line-height: 1.2;
+    }
+    .t-body-lg  { font-size: 16px; line-height: 1.5; color: var(--mist-gray); }
+    .t-body     { font-size: 14px; line-height: 1.5; color: var(--ash); }
+    .t-caption  {
+      font-size: 10px; line-height: 1.5;
+      letter-spacing: .07em; text-transform: uppercase; color: var(--ash);
+    }
+
+    /* ─── Buttons ────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      border-radius: var(--r-btn);
+      font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+      letter-spacing: .03em; cursor: pointer; transition: all .2s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--slate-dust); color: var(--midnight);
+      border: none; padding: 12px 24px;
+    }
+    .btn-primary:hover { box-shadow: var(--shadow-btn); opacity: .92; }
+    .btn-ghost {
+      background: transparent; color: var(--cloud);
+      border: 1px solid var(--cloud); padding: 11px 20px;
+    }
+    .btn-ghost:hover { opacity: .65; }
+    .btn-ghost.dark  { color: var(--midnight); border-color: var(--midnight); }
+    .btn-ghost.dark:hover { opacity: .65; }
+    .btn-primary.dark { background: var(--midnight); color: var(--cloud); border: none; }
+
+    /* ─── Badge ──────────────────────────────────────────────── */
+    .badge {
+      display: inline-flex; align-items: center;
+      background: rgba(200,200,200,.1); color: var(--cloud);
+      border-radius: var(--r-badge);
+      padding: 8px 16px;
+      font-size: 11px; font-weight: 400; letter-spacing: .05em; text-transform: uppercase;
+    }
+    .badge.sm { padding: 5px 12px; font-size: 10px; }
+
+    /* ─── Layout helpers ─────────────────────────────────────── */
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+    .section-gap { padding: 76px 0; }
+    .section-gap-sm { padding: 47px 0; }
+
+    .label-row {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+    }
+    .label-line { width: 24px; height: 1px; background: var(--ash); flex-shrink: 0; }
+
+    /* ─── Navigation ─────────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; inset-inline: 0; z-index: 200;
+      padding: 18px 0;
+      background: rgba(0,0,0,.75);
+      backdrop-filter: blur(24px) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: inline-flex; align-items: center; }
+    .nav-logo svg { height: 36px; width: auto; }
+    .nav-links {
+      display: flex; gap: 32px; list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px; color: var(--ash); letter-spacing: .03em;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--cloud); }
+    .nav-ham { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .nav-ham span { display: block; width: 22px; height: 1px; background: var(--cloud); }
+
+    /* ─── Hero ───────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh; padding-top: 80px; padding-bottom: 76px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      position: relative; overflow: hidden;
+    }
+    /* ── Hero video background ── */
+    .hero-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Dark overlay so text stays readable */
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,.62) 0%,
+        rgba(0,0,0,.45) 50%,
+        rgba(0,0,0,.75) 100%
+      );
+    }
+    .hero-glow {
+      position: absolute; inset: 0; pointer-events: none; z-index: 2;
+      background:
+        radial-gradient(ellipse 60% 55% at 75% 45%, rgba(255,255,255,.025) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(255,255,255,.015) 0%, transparent 70%);
+    }
+    /* decorative grid lines */
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none; opacity: .04; z-index: 2;
+      background-image:
+        linear-gradient(to right, #fff 1px, transparent 1px),
+        linear-gradient(to bottom, #fff 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .hero-content { position: relative; z-index: 3; }
+    .hero-eyebrow { margin-bottom: 28px; }
+    .hero-title {
+      margin-bottom: 40px;
+    }
+    .hero-title em { font-style: italic; color: var(--mist-gray); }
+    .hero-bottom {
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 32px;
+    }
+    .hero-desc { max-width: 380px; }
+    .hero-desc p { font-size: 15px; color: var(--mist-gray); line-height: 1.6; margin-bottom: 28px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-aside { text-align: right; flex-shrink: 0; }
+    .hero-scroll-line {
+      width: 1px; height: 64px; background: var(--charcoal); margin: 0 auto 12px;
+    }
+
+    /* ─── Stats ──────────────────────────────────────────────── */
+    .stats-bar {
+      border-top: 1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      padding: 40px 0;
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: var(--font-serif); font-weight: 500;
+      font-size: 54px; line-height: 1; letter-spacing: -.05em;
+      margin-bottom: 8px;
+    }
+    .stat-num sup { font-size: 30px; vertical-align: super; }
+    .stat-label { font-size: 11px; color: var(--ash); letter-spacing: .07em; text-transform: uppercase; }
+
+    /* ─── Studios ────────────────────────────────────────────── */
+    .studios-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 24px; margin-bottom: 40px;
+    }
+    .studios-main { display: grid; grid-template-columns: 1.5fr 1fr; gap: 12px; }
+    .studios-secondary { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 12px; }
+
+    /* Card base */
+    .studio-card {
+      position: relative; overflow: hidden;
+      border-radius: var(--r-card);
+      background: var(--steel-gray);
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .studio-card::before { /* subtle top-right light leak */
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle at top right, rgba(255,255,255,.04), transparent 70%);
+      pointer-events: none;
+    }
+    .studio-card-inner {
+      position: relative; z-index: 1;
+      padding: 28px;
+      background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.1) 80%, transparent 100%);
+    }
+    .studio-card-badge { margin-bottom: 10px; }
+    .studio-name {
+      font-family: var(--font-serif); font-weight: 500;
+      font-size: 26px; letter-spacing: -.025em; margin-bottom: 6px;
+    }
+    .studio-meta { font-size: 13px; color: var(--light-ash); line-height: 1.5; }
+
+    /* specific card heights */
+    .card-lg  { min-height: 500px; }
+    .card-md  { min-height: 238px; }
+    .card-sm  { min-height: 200px; }
+
+    /* card "image" treatments via gradient + svg noise */
+    .card-a {
+      background:
+        radial-gradient(ellipse 70% 60% at 60% 30%, rgba(255,255,255,.04), transparent),
+        linear-gradient(160deg, #1c1c1c 0%, #080808 100%);
+    }
+    .card-b {
+      background:
+        radial-gradient(ellipse 50% 80% at 20% 60%, rgba(255,255,255,.03), transparent),
+        linear-gradient(200deg, #181818 0%, #0c0c0c 100%);
+    }
+    .card-c {
+      background:
+        radial-gradient(ellipse 80% 40% at 80% 20%, rgba(255,255,255,.04), transparent),
+        linear-gradient(120deg, #141414 0%, #0a0a0a 100%);
+    }
+    .card-d {
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,.025), transparent 60%),
+        linear-gradient(180deg, #0d0d0d 0%, #020202 100%);
+    }
+    .card-e {
+      background:
+        radial-gradient(ellipse 60% 60% at 30% 50%, rgba(255,255,255,.03), transparent),
+        linear-gradient(150deg, #1a1a1a 0%, #0a0a0a 100%);
+    }
+    .card-f {
+      background:
+        radial-gradient(ellipse 90% 60% at 50% 0%, rgba(255,255,255,.05), transparent 60%),
+        linear-gradient(180deg, #1e1e1e 0%, #0b0b0b 100%);
+    }
+    /* Decorative camera diagram on card A */
+    .card-deco {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      opacity: .07; pointer-events: none;
+    }
+    .card-deco svg { width: 260px; height: 260px; }
+
+    /* ─── Services ───────────────────────────────────────────── */
+    .services-section { background: var(--steel-gray); }
+    .services-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 76px; align-items: start; }
+    .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+    .service-item {
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+      border-radius: var(--r-card); padding: 24px;
+    }
+    .service-icon {
+      width: 38px; height: 38px;
+      border-radius: var(--r-badge);
+      background: rgba(200,200,200,.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; margin-bottom: 16px;
+    }
+    .service-name { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+    .service-desc { font-size: 12px; color: var(--ash); line-height: 1.6; }
+
+    /* ─── Equipment strip ────────────────────────────────────── */
+    .equip-strip {
+      display: flex; gap: 2px; overflow: hidden; border-radius: var(--r-card);
+    }
+    .equip-item {
+      flex: 1; background: var(--steel-gray);
+      border-right: 1px solid rgba(255,255,255,.04);
+      padding: 22px 18px; min-width: 0;
+    }
+    .equip-item:last-child { border-right: none; }
+    .equip-icon { font-size: 20px; margin-bottom: 10px; }
+    .equip-name { font-size: 13px; font-weight: 500; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .equip-detail { font-size: 11px; color: var(--ash); }
+
+    /* ─── Pricing ────────────────────────────────────────────── */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 40px; }
+    .pricing-card {
+      border-radius: var(--r-card); padding: 32px;
+      background: var(--steel-gray); border: 1px solid rgba(255,255,255,.07);
+      position: relative; display: flex; flex-direction: column;
+    }
+    .pricing-card.featured {
+      background: var(--cloud); color: var(--midnight);
+      box-shadow: var(--shadow-elev);
+    }
+    .popular-tag {
+      position: absolute; top: 20px; right: 20px;
+    }
+    .pricing-tier {
+      font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--ash); margin-bottom: 20px;
+    }
+    .pricing-card.featured .pricing-tier { color: var(--charcoal); }
+    .pricing-price {
+      font-family: var(--font-serif); font-weight: 500;
+      font-size: 54px; line-height: 1; letter-spacing: -.05em; margin-bottom: 4px;
+    }
+    .pricing-period {
+      font-size: 12px; color: var(--ash); margin-bottom: 28px;
+    }
+    .pricing-card.featured .pricing-period { color: var(--charcoal); }
+    .pricing-hr {
+      height: 1px; background: rgba(255,255,255,.08); margin-bottom: 24px;
+    }
+    .pricing-card.featured .pricing-hr { background: rgba(0,0,0,.1); }
+    .pricing-features {
+      list-style: none; display: flex; flex-direction: column; gap: 11px;
+      flex: 1; margin-bottom: 28px;
+    }
+    .pricing-features li {
+      font-size: 13px; color: var(--mist-gray);
+      display: flex; align-items: flex-start; gap: 10px; line-height: 1.4;
+    }
+    .pricing-card.featured .pricing-features li { color: var(--midnight); }
+    .pricing-features li::before {
+      content: ''; width: 4px; height: 4px; background: var(--ash);
+      border-radius: 50%; flex-shrink: 0; margin-top: 5px;
+    }
+    .pricing-card.featured .pricing-features li::before { background: var(--charcoal); }
+    .pricing-cta { width: 100%; justify-content: center; }
+
+    /* ─── Process ────────────────────────────────────────────── */
+    .process-section { background: var(--steel-gray); }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 28px;
+      margin-top: 40px; position: relative;
+    }
+    .process-steps::before {
+      content: ''; position: absolute;
+      top: 19px; left: 40px; right: 40px;
+      height: 1px; background: rgba(255,255,255,.07);
+    }
+    .process-step { padding-top: 48px; position: relative; }
+    .step-num {
+      position: absolute; top: 0; left: 0;
+      width: 38px; height: 38px; border-radius: var(--r-badge);
+      background: var(--steel-gray); border: 1px solid rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: var(--ash); letter-spacing: .03em;
+      z-index: 1; background: var(--midnight);
+    }
+    .step-title { font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+    .step-desc { font-size: 13px; color: var(--ash); line-height: 1.6; }
+
+    /* ─── Testimonials ───────────────────────────────────────── */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 40px; }
+    .testimonial {
+      background: var(--steel-gray); border-radius: var(--r-card); padding: 32px;
+      border: 1px solid rgba(255,255,255,.06);
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .testimonial-quote {
+      font-size: 15px; line-height: 1.7; color: var(--light-ash); margin-bottom: 28px;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .author-avatar {
+      width: 38px; height: 38px; border-radius: 50%; background: var(--charcoal); flex-shrink: 0;
+    }
+    .author-name { font-size: 13px; font-weight: 500; }
+    .author-role { font-size: 11px; color: var(--ash); }
+
+    /* ─── CTA ────────────────────────────────────────────────── */
+    .cta-section {
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+    .cta-section .t-display-lg { margin-bottom: 20px; }
+    .cta-section .t-body-lg { max-width: 420px; margin: 0 auto 40px; }
+    .cta-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .cta-note { margin-top: 20px; }
+
+    /* ─── Footer ─────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,.08); padding: 47px 0 32px;
+    }
+    .footer-inner { display: flex; justify-content: space-between; gap: 40px; margin-bottom: 40px; }
+    .footer-brand { max-width: 260px; flex-shrink: 0; }
+    .footer-logo { margin-bottom: 16px; }
+    .footer-logo svg { height: 32px; width: auto; }
+    .footer-tagline { font-size: 13px; color: var(--ash); line-height: 1.6; }
+    .footer-cols { display: grid; grid-template-columns: repeat(3,1fr); gap: 40px; }
+    .footer-col-title {
+      font-size: 10px; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--ash); margin-bottom: 14px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-col a { font-size: 13px; color: var(--mist-gray); transition: color .2s; }
+    .footer-col a:hover { color: var(--cloud); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.06); padding-top: 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-copy { font-size: 11px; color: var(--ash); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 11px; color: var(--ash); transition: color .2s; }
+    .footer-legal a:hover { color: var(--cloud); }
+
+    /* ─── Divider ────────────────────────────────────────────── */
+    .hr { height: 1px; background: rgba(255,255,255,.06); }
+
+    /* ─── Scroll reveal ──────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .services-inner { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-ham { display: flex; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; }
+      .hero-aside { display: none; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .studios-main { grid-template-columns: 1fr; }
+      .studios-secondary { grid-template-columns: 1fr 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .equip-strip { flex-wrap: wrap; }
+      .equip-item { min-width: calc(50% - 1px); }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .process-steps::before { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; }
+      .footer-cols { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .studios-header { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .wrap { padding: 0 20px; }
+      .studios-secondary { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .footer-cols { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Gallery Carousel ───────────────────────────────────── */
+    .gallery-section { overflow: hidden; }
+
+    .gallery-carousel {
+      position: relative;
+      background: var(--steel-gray);
+      border-top: 1px solid rgba(255,255,255,.05);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+
+    /* Track: fixed height on desktop, auto on mobile */
+    .gallery-track {
+      position: relative;
+      height: 540px;
+      overflow: hidden;
+    }
+
+    /* All slides stacked */
+    .gallery-slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(1.015);
+      transition: opacity .65s cubic-bezier(.4,0,.2,1),
+                  transform .65s cubic-bezier(.4,0,.2,1);
+      z-index: 0;
+    }
+    .gallery-slide.active {
+      opacity: 1;
+      pointer-events: all;
+      transform: scale(1);
+      z-index: 2;
+    }
+
+    /* Image side */
+    .gallery-image {
+      flex: 0 0 62%;
+      position: relative;
+      overflow: hidden;
+    }
+    .gallery-image img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+      transition: transform 8s ease;
+    }
+    .gallery-slide.active .gallery-image img { transform: scale(1.04); }
+
+    /* Gradient placeholders (remove when adding real photos) */
+    .gi-1 { background: linear-gradient(140deg,#1c1408 0%,#2d2210 45%,#0d0c0a 100%); }
+    .gi-2 { background: linear-gradient(160deg,#0a1222 0%,#0f1a30 50%,#050509 100%); }
+    .gi-3 { background: linear-gradient(125deg,#0e0e0c 0%,#1c1c14 50%,#080808 100%); }
+    .gi-4 { background: linear-gradient(150deg,#120c0c 0%,#1e1212 50%,#080606 100%); }
+    .gi-5 { background: linear-gradient(135deg,#08100e 0%,#0e1a18 50%,#060608 100%); }
+
+    /* Decorative SVG overlay */
+    .g-deco {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      opacity: .07; pointer-events: none;
+    }
+
+    /* Info panel */
+    .gallery-panel {
+      flex: 0 0 38%;
+      padding: 52px 52px 48px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 1px solid rgba(255,255,255,.06);
+      background: var(--steel-gray);
+    }
+
+    .gallery-counter {
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ash);
+      margin-bottom: 28px;
+    }
+    .gallery-counter strong { color: var(--cloud); font-weight: 400; }
+
+    .gallery-title {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      font-size: clamp(20px, 2vw, 28px);
+      line-height: 1.25;
+      letter-spacing: -.025em;
+      color: var(--cloud);
+      margin-bottom: 18px;
+    }
+
+    .gallery-desc {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--ash);
+      flex: 1;
+      margin-bottom: 40px;
+    }
+
+    .gallery-nav-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .gallery-arrow {
+      width: 44px; height: 44px;
+      border-radius: var(--r-badge);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.18);
+      color: var(--cloud);
+      font-size: 17px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .2s;
+      line-height: 1;
+      user-select: none;
+    }
+    .gallery-arrow:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.5); }
+    .gallery-arrow:active { transform: scale(.93); }
+
+    /* Bottom bar */
+    .gallery-bottom {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 18px 32px;
+      border-top: 1px solid rgba(255,255,255,.05);
+      background: var(--steel-gray);
+    }
+
+    .gallery-dots-row { display: flex; gap: 8px; flex-shrink: 0; }
+    .gallery-dot {
+      width: 5px; height: 5px;
+      border-radius: 9999px;
+      background: var(--charcoal);
+      border: none; cursor: pointer;
+      transition: all .35s cubic-bezier(.4,0,.2,1);
+      padding: 0; flex-shrink: 0;
+    }
+    .gallery-dot.active { background: var(--cloud); width: 24px; }
+
+    .gallery-progress-track { flex: 1; height: 1px; background: rgba(255,255,255,.08); }
+    .gallery-progress-fill  { height: 100%; background: rgba(255,255,255,.45); transition: width .55s ease; }
+
+    .gallery-count-label {
+      font-size: 10px; color: var(--ash);
+      letter-spacing: .1em; white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* CTA below carousel */
+    .gallery-cta {
+      text-align: center;
+      padding-top: 52px;
+    }
+
+    /* ── Mobile ─ */
+    @media (max-width: 768px) {
+      .gallery-track { height: auto; }
+      .gallery-slide { position: relative; flex-direction: column; display: none; }
+      .gallery-slide.active { display: flex; opacity: 1; transform: none; }
+      .gallery-image { flex: 0 0 240px; }
+      .gallery-panel { flex: 0 0 auto; padding: 28px 24px 32px; border-left: none; border-top: 1px solid rgba(255,255,255,.06); }
+      .gallery-title { font-size: 20px; }
+      .gallery-bottom { padding: 14px 20px; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══════════════════════════════════════════════════ -->
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a href="#" class="nav-logo" aria-label="AB Estudio">
+        <!-- Logo AB Estudio -->
+        <svg viewBox="0 0 96 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- A -->
+          <path d="M2 31 L11.5 7 L21 31 M5.5 22.5 H17.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Rayo entre A y B -->
+          <path d="M22 6 L18.5 18 H22.5 L19.5 32 L28.5 15 H24.5 L27.5 6 Z" fill="#ffffff"/>
+          <!-- B -->
+          <path d="M30 7 H40 C43.5 7 46 9.5 46 13 C46 16.5 43.5 19 40 19 H30 M30 19 H41 C45 19 47.5 22 47.5 25.5 C47.5 29.5 45 32 41 32 H30 M30 7 V32" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- ESTUDIO wordmark -->
+          <text x="0" y="37.5" font-family="'Inter', system-ui, sans-serif" font-size="7" font-weight="500" letter-spacing="0.2em" fill="#777">ESTUDIO</text>
+        </svg>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#estudios">Estudios</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#precios">Precios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a href="#precios" class="btn btn-primary">Reservar ahora</a>
+      <div class="nav-ham" onclick="alert('Menú móvil')">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ══ HERO ═════════════════════════════════════════════════ -->
+  <section class="hero">
+    <!-- Video de fondo en loop -->
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="video/hero.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+
+    <div class="wrap hero-content">
+      <div class="hero-eyebrow">
+        <span class="badge">Monte Grande, Buenos Aires &nbsp;·&nbsp; Studio Rental</span>
+      </div>
+
+      <h1 class="t-display-xl hero-title">
+        Tu visión,<br><em>nuestro espacio.</em>
+      </h1>
+
+      <div class="hero-bottom">
+        <div class="hero-desc">
+          <p>
+            Estudio para producción de fotografía y video. Espacio profesional
+            con fondo infinito, capacidad Multi-Set y acceso vehicular directo al set.
+          </p>
+          <div class="hero-actions">
+            <a href="#estudios" class="btn btn-primary">Ver estudios</a>
+            <a href="#precios"  class="btn btn-ghost">Precios y disponibilidad</a>
+          </div>
+        </div>
+
+        <div class="hero-aside">
+          <div class="hero-scroll-line"></div>
+          <span class="t-caption">Explorar</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ STATS ════════════════════════════════════════════════ -->
+  <div class="stats-bar">
+    <div class="wrap">
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-num">200<sup>m²</sup></div>
+          <div class="stat-label">Superficie total</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3×5</div>
+          <div class="stat-label">Fondo infinito (m)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">1,85</div>
+          <div class="stat-label">Acceso vehicular (m)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">Multi</div>
+          <div class="stat-label">Sets simultáneos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ STUDIOS ══════════════════════════════════════════════ -->
+  <section class="section-gap" id="estudios">
+    <div class="wrap">
+
+      <div class="studios-header reveal">
+        <div>
+          <div class="label-row">
+            <div class="label-line"></div>
+            <span class="t-caption">Nuestros espacios</span>
+          </div>
+          <h2 class="t-display">Estudios diseñados<br>para cada proyecto.</h2>
+        </div>
+        <a href="#precios" class="btn btn-ghost" style="flex-shrink:0">Ver disponibilidad</a>
+      </div>
+
+      <!-- Main grid -->
+      <div class="studios-main reveal">
+        <!-- CARD A: Infinity Cyclorama -->
+        <div class="studio-card card-lg card-a">
+          <div class="card-deco">
+            <svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="130" cy="130" r="100" stroke="white" stroke-width="1"/>
+              <circle cx="130" cy="130" r="60"  stroke="white" stroke-width="1"/>
+              <circle cx="130" cy="130" r="20"  stroke="white" stroke-width="1"/>
+              <line x1="0"   y1="130" x2="260" y2="130" stroke="white" stroke-width=".5"/>
+              <line x1="130" y1="0"   x2="130" y2="260" stroke="white" stroke-width=".5"/>
+            </svg>
+          </div>
+          <div class="studio-card-inner">
+            <div class="studio-card-badge"><span class="badge sm">Fondo Infinito</span></div>
+            <div class="studio-name">Fondo Infinito</div>
+            <div class="studio-meta">
+              Doble cara blanca · 3m de alto × 5m de piso<br>
+              Ideal para moda, publicidad y contenido comercial a gran escala.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="studio-card card-md card-b">
+            <div class="studio-card-inner">
+              <div class="studio-card-badge"><span class="badge sm">Multi-Set</span></div>
+              <div class="studio-name">Capacidad Multi-Set</div>
+              <div class="studio-meta">200 m² para múltiples sets en simultáneo. Máxima flexibilidad de producción.</div>
+            </div>
+          </div>
+          <div class="studio-card card-md card-c">
+            <div class="studio-card-inner">
+              <div class="studio-card-badge"><span class="badge sm">Acceso Vehicular</span></div>
+              <div class="studio-name">Acceso Vehicular</div>
+              <div class="studio-meta">Ingreso directo de vehículos al set · Portón de 1,85 m de altura.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary grid -->
+      <div class="studios-secondary reveal">
+        <div class="studio-card card-sm card-d">
+          <div class="studio-card-inner">
+            <div class="studio-card-badge"><span class="badge sm">Fotografía</span></div>
+            <div class="studio-name">Producción Foto</div>
+            <div class="studio-meta">Lookbook, e-commerce, editorial y publicidad. Fondo infinito disponible.</div>
+          </div>
+        </div>
+        <div class="studio-card card-sm card-e">
+          <div class="studio-card-inner">
+            <div class="studio-card-badge"><span class="badge sm">Video</span></div>
+            <div class="studio-name">Producción Video</div>
+            <div class="studio-meta">Spots, contenido digital, videoclips y producciones audiovisuales.</div>
+          </div>
+        </div>
+        <div class="studio-card card-sm card-f">
+          <div class="studio-card-inner">
+            <div class="studio-card-badge"><span class="badge sm">Dirección</span></div>
+            <div class="studio-name">@ale.barriosph</div>
+            <div class="studio-meta">Director del estudio · Alejo Ortega 147, Monte Grande, Bs. As.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══ GALLERY CAROUSEL ════════════════════════════════════ -->
+  <section class="section-gap gallery-section" id="galeria">
+    <div class="wrap reveal" style="margin-bottom:40px;">
+      <div class="label-row">
+        <div class="label-line"></div>
+        <span class="t-caption">El estudio en imágenes</span>
+      </div>
+      <h2 class="t-display">Mirá el espacio.</h2>
+    </div>
+
+    <div class="gallery-carousel reveal" id="gCarousel">
+      <div class="gallery-track" id="gTrack">
+
+        <!-- ── SLIDE 1: Luz natural ── -->
+        <div class="gallery-slide active" data-idx="0">
+          <div class="gallery-image gi-1">
+            <img src="img/luz-natural.jpg" alt="Luz natural — Estudio AB" onerror="this.style.display='none'" />
+            <svg class="g-deco" viewBox="0 0 500 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="380" cy="100" r="180" stroke="white" stroke-width=".8"/>
+              <circle cx="380" cy="100" r="100" stroke="white" stroke-width=".5"/>
+              <line x1="0" y1="100" x2="500" y2="100" stroke="white" stroke-width=".4"/>
+              <line x1="380" y1="0"  x2="380" y2="380" stroke="white" stroke-width=".4"/>
+            </svg>
+          </div>
+          <div class="gallery-panel">
+            <div class="gallery-counter"><strong>01</strong> / 05</div>
+            <h3 class="gallery-title">Luz natural: el toque único para tus producciones.</h3>
+            <p class="gallery-desc">Aprovechá la calidez de los ventanales de nuestro estudio. Una opción hermosa para darle a tus fotos y videos esa estética orgánica y única que solo el sol puede dar. Dejá que la luz natural sea tu mejor herramienta.</p>
+            <div class="gallery-nav-row">
+              <button class="gallery-arrow" onclick="gPrev()" aria-label="Anterior">&#8592;</button>
+              <button class="gallery-arrow" onclick="gNext()" aria-label="Siguiente">&#8594;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── SLIDE 2: Auto al set ── -->
+        <div class="gallery-slide" data-idx="1">
+          <div class="gallery-image gi-2">
+            <img src="img/auto-set.jpg" alt="Acceso vehicular — Estudio AB" onerror="this.style.display='none'" />
+            <svg class="g-deco" viewBox="0 0 500 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="60"  y="120" width="380" height="180" rx="3" stroke="white" stroke-width=".8"/>
+              <rect x="160" y="120" width="180" height="100" stroke="white" stroke-width=".4"/>
+              <line x1="60" y1="220" x2="440" y2="220" stroke="white" stroke-width=".4" stroke-dasharray="8 6"/>
+              <circle cx="130" cy="310" r="25" stroke="white" stroke-width=".6"/>
+              <circle cx="370" cy="310" r="25" stroke="white" stroke-width=".6"/>
+            </svg>
+          </div>
+          <div class="gallery-panel">
+            <div class="gallery-counter"><strong>02</strong> / 05</div>
+            <h3 class="gallery-title">Sí, podés meter un auto al set.</h3>
+            <p class="gallery-desc">Imaginate las producciones de foto y video que podés encarar en Estudio AB con este diferencial. Si sos una productora, tenés un cliente exigente o un proyecto personal ambicioso, nuestro acceso vehicular directo al set de 200 m² es lo que necesitás para subir de nivel.</p>
+            <div class="gallery-nav-row">
+              <button class="gallery-arrow" onclick="gPrev()" aria-label="Anterior">&#8592;</button>
+              <button class="gallery-arrow" onclick="gNext()" aria-label="Siguiente">&#8594;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── SLIDE 3: Parrilla ── -->
+        <div class="gallery-slide" data-idx="2">
+          <div class="gallery-image gi-3">
+            <img src="img/parrilla.jpg" alt="Parrilla regulable — Estudio AB" onerror="this.style.display='none'" />
+            <svg class="g-deco" viewBox="0 0 500 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0"   y1="80"  x2="500" y2="80"  stroke="white" stroke-width="1.2"/>
+              <line x1="80"  y1="80"  x2="80"  y2="380" stroke="white" stroke-width=".5"/>
+              <line x1="180" y1="80"  x2="180" y2="380" stroke="white" stroke-width=".5"/>
+              <line x1="280" y1="80"  x2="280" y2="380" stroke="white" stroke-width=".5"/>
+              <line x1="380" y1="80"  x2="380" y2="380" stroke="white" stroke-width=".5"/>
+              <line x1="0"   y1="160" x2="500" y2="160" stroke="white" stroke-width=".4" stroke-dasharray="6 6"/>
+              <line x1="0"   y1="240" x2="500" y2="240" stroke="white" stroke-width=".4" stroke-dasharray="6 6"/>
+            </svg>
+          </div>
+          <div class="gallery-panel">
+            <div class="gallery-counter"><strong>03</strong> / 05</div>
+            <h3 class="gallery-title">Parrilla de altura regulable.</h3>
+            <p class="gallery-desc">Contamos con una parrilla técnica de altura regulable diseñada para colgar luces, fondos, equipos y escenografía pesada. En Estudio AB, la altura deja de ser un techo para convertirse en tu posibilidad de elevar el nivel de tus producciones a una escala profesional.</p>
+            <div class="gallery-nav-row">
+              <button class="gallery-arrow" onclick="gPrev()" aria-label="Anterior">&#8592;</button>
+              <button class="gallery-arrow" onclick="gNext()" aria-label="Siguiente">&#8594;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── SLIDE 4: Espacio y comodidades ── -->
+        <div class="gallery-slide" data-idx="3">
+          <div class="gallery-image gi-4">
+            <img src="img/espacio.jpg" alt="Espacio y comodidades — Estudio AB" onerror="this.style.display='none'" />
+            <svg class="g-deco" viewBox="0 0 500 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="50"  y="60"  width="180" height="120" rx="3" stroke="white" stroke-width=".7"/>
+              <rect x="270" y="60"  width="180" height="120" rx="3" stroke="white" stroke-width=".7"/>
+              <rect x="50"  y="220" width="80"  height="100" rx="3" stroke="white" stroke-width=".5"/>
+              <rect x="160" y="220" width="80"  height="100" rx="3" stroke="white" stroke-width=".5"/>
+              <rect x="270" y="220" width="80"  height="100" rx="3" stroke="white" stroke-width=".5"/>
+              <rect x="380" y="220" width="70"  height="100" rx="3" stroke="white" stroke-width=".5"/>
+            </svg>
+          </div>
+          <div class="gallery-panel">
+            <div class="gallery-counter"><strong>04</strong> / 05</div>
+            <h3 class="gallery-title">El espacio y comodidades.</h3>
+            <p class="gallery-desc">Diseñado para la máxima productividad. Contamos con camarín profesional, mobiliario de trabajo, equipo de sonido, cocina, baño y Wi-Fi de alta velocidad.</p>
+            <div class="gallery-nav-row">
+              <button class="gallery-arrow" onclick="gPrev()" aria-label="Anterior">&#8592;</button>
+              <button class="gallery-arrow" onclick="gNext()" aria-label="Siguiente">&#8594;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── SLIDE 5: Infraestructura híbrida ── -->
+        <div class="gallery-slide" data-idx="4">
+          <div class="gallery-image gi-5">
+            <img src="img/infraestructura.jpg" alt="Infraestructura híbrida — Estudio AB" onerror="this.style.display='none'" />
+            <svg class="g-deco" viewBox="0 0 500 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="250" cy="190" r="140" stroke="white" stroke-width=".8"/>
+              <circle cx="250" cy="190" r="80"  stroke="white" stroke-width=".5"/>
+              <circle cx="250" cy="190" r="30"  stroke="white" stroke-width=".4"/>
+              <line x1="0"   y1="190" x2="500" y2="190" stroke="white" stroke-width=".4"/>
+              <line x1="250" y1="0"   x2="250" y2="380" stroke="white" stroke-width=".4"/>
+              <line x1="110" y1="50"  x2="390" y2="330" stroke="white" stroke-width=".3" stroke-dasharray="6 6"/>
+              <line x1="390" y1="50"  x2="110" y2="330" stroke="white" stroke-width=".3" stroke-dasharray="6 6"/>
+            </svg>
+          </div>
+          <div class="gallery-panel">
+            <div class="gallery-counter"><strong>05</strong> / 05</div>
+            <h3 class="gallery-title">Infraestructura híbrida.</h3>
+            <p class="gallery-desc">Ideal para alternar entre foto y video sin cambiar de locación. Un espacio versátil que se adapta a cualquier tipo de producción, maximizando tu tiempo y recursos en cada sesión.</p>
+            <div class="gallery-nav-row">
+              <button class="gallery-arrow" onclick="gPrev()" aria-label="Anterior">&#8592;</button>
+              <button class="gallery-arrow" onclick="gNext()" aria-label="Siguiente">&#8594;</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /gallery-track -->
+
+      <!-- Bottom: dots + progress + label -->
+      <div class="gallery-bottom">
+        <div class="gallery-dots-row" id="gDots">
+          <button class="gallery-dot active" onclick="gGoto(0)" aria-label="Slide 1"></button>
+          <button class="gallery-dot"        onclick="gGoto(1)" aria-label="Slide 2"></button>
+          <button class="gallery-dot"        onclick="gGoto(2)" aria-label="Slide 3"></button>
+          <button class="gallery-dot"        onclick="gGoto(3)" aria-label="Slide 4"></button>
+          <button class="gallery-dot"        onclick="gGoto(4)" aria-label="Slide 5"></button>
+        </div>
+        <div class="gallery-progress-track">
+          <div class="gallery-progress-fill" id="gProgress" style="width:20%"></div>
+        </div>
+        <span class="gallery-count-label" id="gLabel">01 / 05</span>
+      </div>
+    </div><!-- /gallery-carousel -->
+
+    <!-- CTA -->
+    <div class="wrap gallery-cta reveal">
+      <a href="https://wa.me/5491168493300" class="btn btn-primary" style="font-size:15px;padding:14px 40px;letter-spacing:.04em;">
+        Consultar &nbsp;→
+      </a>
+    </div>
+  </section>
+
+  <!-- ══ SERVICES ═════════════════════════════════════════════ -->
+  <section class="section-gap services-section" id="servicios">
+    <div class="wrap">
+      <div class="services-inner">
+
+        <div class="reveal">
+          <div class="label-row">
+            <div class="label-line"></div>
+            <span class="t-caption">Servicios</span>
+          </div>
+          <h2 class="t-display" style="margin-bottom:20px;">
+            Todo lo que<br>necesitás en<br>un solo lugar.
+          </h2>
+          <p class="t-body-lg" style="margin-bottom:32px;">
+            Contamos con el equipamiento y el equipo técnico para que tu producción sea un éxito.
+          </p>
+          <a href="#contacto" class="btn btn-ghost">Consultar disponibilidad</a>
+        </div>
+
+        <div class="services-grid reveal">
+          <div class="service-item">
+            <div class="service-icon">◎</div>
+            <div class="service-name">Fotografía</div>
+            <div class="service-desc">Flashes de estudio, softboxes y background papers en más de 30 colores.</div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">▶</div>
+            <div class="service-name">Video & Film</div>
+            <div class="service-desc">Iluminación continua LED, rails de cámara y sistemas de sonido profesionales.</div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">◈</div>
+            <div class="service-name">Equipamiento</div>
+            <div class="service-desc">Alquiler de lentes, trípodes, grúas y accesorios adicionales por hora.</div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">◐</div>
+            <div class="service-name">Post-Producción</div>
+            <div class="service-desc">Sala de edición con pantalla calibrada, Lightroom y DaVinci Resolve.</div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">⊕</div>
+            <div class="service-name">Maquillaje</div>
+            <div class="service-desc">Camarín privado con iluminación de espejo y silla profesional.</div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">⊞</div>
+            <div class="service-name">Catering</div>
+            <div class="service-desc">Servicio incluido en producciones de medio día y día completo.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ EQUIPMENT STRIP ══════════════════════════════════════ -->
+  <section class="section-gap-sm">
+    <div class="wrap">
+      <div class="label-row reveal">
+        <div class="label-line"></div>
+        <span class="t-caption">Equipamiento destacado</span>
+      </div>
+      <div class="equip-strip reveal">
+        <div class="equip-item">
+          <div class="equip-icon">◎</div>
+          <div class="equip-name">Profoto D2</div>
+          <div class="equip-detail">500W · 2 unidades</div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-icon">▦</div>
+          <div class="equip-name">Sony FX6</div>
+          <div class="equip-detail">Cinema Line · FF</div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-icon">◫</div>
+          <div class="equip-name">Aputure 600D</div>
+          <div class="equip-detail">LED continuo</div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-icon">◭</div>
+          <div class="equip-name">DJI Ronin 4D</div>
+          <div class="equip-detail">Gimbal integrado</div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-icon">◻</div>
+          <div class="equip-name">Elinchrom 150×200</div>
+          <div class="equip-detail">Softbox XL</div>
+        </div>
+        <div class="equip-item">
+          <div class="equip-icon">◈</div>
+          <div class="equip-name">Background Papers</div>
+          <div class="equip-detail">+30 colores</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ PRICING ══════════════════════════════════════════════ -->
+  <section class="section-gap" id="precios">
+    <div class="wrap">
+
+      <div style="text-align:center;max-width:540px;margin:0 auto;" class="reveal">
+        <div class="label-row" style="justify-content:center;">
+          <div class="label-line"></div>
+          <span class="t-caption">Precios</span>
+          <div class="label-line"></div>
+        </div>
+        <h2 class="t-display">Simple, transparente,<br>sin sorpresas.</h2>
+      </div>
+
+      <div class="pricing-grid reveal">
+
+        <!-- Hour -->
+        <div class="pricing-card">
+          <div class="pricing-tier">Por Hora</div>
+          <div class="pricing-price">$85</div>
+          <div class="pricing-period">USD · mínimo 2 horas</div>
+          <div class="pricing-hr"></div>
+          <ul class="pricing-features">
+            <li>Acceso al estudio seleccionado</li>
+            <li>Iluminación básica incluida</li>
+            <li>Vestuario y camarín de maquillaje</li>
+            <li>WiFi de alta velocidad</li>
+            <li>Estacionamiento gratuito</li>
+          </ul>
+          <a href="#contacto" class="btn btn-ghost pricing-cta">Reservar</a>
+        </div>
+
+        <!-- Half day — featured -->
+        <div class="pricing-card featured">
+          <div class="popular-tag">
+            <span class="badge sm" style="background:rgba(0,0,0,.08);color:#000;">Popular</span>
+          </div>
+          <div class="pricing-tier">Medio Día</div>
+          <div class="pricing-price">$290</div>
+          <div class="pricing-period">USD · 5 horas continuas</div>
+          <div class="pricing-hr"></div>
+          <ul class="pricing-features">
+            <li>Todo lo del plan Por Hora</li>
+            <li>Equipamiento completo incluido</li>
+            <li>Asistente técnico de producción</li>
+            <li>Sala de edición por 2 horas</li>
+            <li>Coffee break para el equipo</li>
+          </ul>
+          <a href="#contacto" class="btn btn-primary dark pricing-cta">Reservar</a>
+        </div>
+
+        <!-- Full day -->
+        <div class="pricing-card">
+          <div class="pricing-tier">Día Completo</div>
+          <div class="pricing-price">$520</div>
+          <div class="pricing-period">USD · 10 horas · todo incluido</div>
+          <div class="pricing-hr"></div>
+          <ul class="pricing-features">
+            <li>Todo lo del plan Medio Día</li>
+            <li>Catering almuerzo para 5 personas</li>
+            <li>Sala de edición sin límite</li>
+            <li>Prioridad en reservas futuras</li>
+            <li>10% de descuento en próxima reserva</li>
+          </ul>
+          <a href="#contacto" class="btn btn-ghost pricing-cta">Reservar</a>
+        </div>
+
+      </div>
+
+      <p class="t-body reveal" style="text-align:center;margin-top:20px;">
+        ¿Necesitás algo especial?
+        <a href="#contacto" style="color:var(--cloud);border-bottom:1px solid rgba(255,255,255,.2);">
+          Armamos un paquete a medida.
+        </a>
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ══ PROCESS ══════════════════════════════════════════════ -->
+  <section class="section-gap process-section">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="label-row">
+          <div class="label-line"></div>
+          <span class="t-caption">¿Cómo funciona?</span>
+        </div>
+        <h2 class="t-display">Reservá en minutos.</h2>
+      </div>
+
+      <div class="process-steps reveal">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <div class="step-title">Conocé el espacio</div>
+          <div class="step-desc">200 m² con fondo infinito, capacidad Multi-Set y acceso vehicular directo.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <div class="step-title">Seleccioná fecha y hora</div>
+          <div class="step-desc">Verificá disponibilidad en tiempo real y elegí el rango horario que necesitás.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <div class="step-title">Confirmá la reserva</div>
+          <div class="step-desc">Pagá el 50% para asegurar tu turno. El resto se abona el día de la producción.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <div class="step-title">¡A producir!</div>
+          <div class="step-desc">Llegá, configurá tu espacio y contá con nuestro equipo técnico cuando lo necesitás.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ TESTIMONIALS ══════════════════════════════════════════ -->
+  <section class="section-gap">
+    <div class="wrap">
+      <div class="label-row reveal">
+        <div class="label-line"></div>
+        <span class="t-caption">Lo que dicen nuestros clientes</span>
+      </div>
+      <h2 class="t-display reveal" style="margin-bottom:0;">
+        Creadores que confían<br>en AB Estudio.
+      </h2>
+
+      <div class="testimonials-grid reveal">
+
+        <div class="testimonial">
+          <p class="testimonial-quote">
+            "El Estudio A es increíble. La cyclorama infinita nos permitió trabajar con total fluidez durante toda la campaña. El equipo técnico fue un plus enorme."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar"></div>
+            <div>
+              <div class="author-name">Valentina Roca</div>
+              <div class="author-role">Fotógrafa de moda · Buenos Aires</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <p class="testimonial-quote">
+            "Produjimos el videoclip completo en el Estudio Cinema. La insonorización es perfecta y la iluminación LED que tienen es de primer nivel profesional."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:#2a2a2a;"></div>
+            <div>
+              <div class="author-name">Nicolás Ferreyra</div>
+              <div class="author-role">Director audiovisual · Rosario</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <p class="testimonial-quote">
+            "Usamos Estudio AB para todas nuestras producciones de e-commerce. La variedad de fondos y la organización del espacio hacen la diferencia frente a otros estudios."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:#222;"></div>
+            <div>
+              <div class="author-name">Sofía Blanco</div>
+              <div class="author-role">Creative Director · Agencia Volt</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ CTA ══════════════════════════════════════════════════ -->
+  <section class="section-gap cta-section" id="contacto">
+    <div class="wrap">
+      <div class="label-row reveal" style="justify-content:center;">
+        <div class="label-line"></div>
+        <span class="t-caption">Reservá hoy</span>
+        <div class="label-line"></div>
+      </div>
+      <h2 class="t-display-lg reveal">
+        Tu próxima producción<br><em>empieza aquí.</em>
+      </h2>
+      <p class="t-body-lg reveal">
+        Disponibilidad en tiempo real. Confirmación inmediata. Sin burocracia.
+      </p>
+      <div class="cta-actions reveal">
+        <a href="mailto:estudioab.ok@gmail.com" class="btn btn-primary" style="font-size:14px;padding:14px 28px;">
+          Reservar ahora &nbsp;→
+        </a>
+        <a href="https://wa.me/5491168493300" class="btn btn-ghost" style="font-size:14px;padding:13px 24px;">
+          WhatsApp
+        </a>
+      </div>
+      <p class="t-body cta-note reveal">
+        O escribinos a
+        <a href="mailto:estudioab.ok@gmail.com" style="color:var(--cloud);border-bottom:1px solid rgba(255,255,255,.2);">
+          estudioab.ok@gmail.com
+        </a>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ══ FOOTER ════════════════════════════════════════════════ -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <svg viewBox="0 0 110 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- A -->
+              <path d="M2 31 L11.5 7 L21 31 M5.5 22.5 H17.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Rayo -->
+              <path d="M22 6 L18.5 18 H22.5 L19.5 32 L28.5 15 H24.5 L27.5 6 Z" fill="#ffffff"/>
+              <!-- B -->
+              <path d="M30 7 H40 C43.5 7 46 9.5 46 13 C46 16.5 43.5 19 40 19 H30 M30 19 H41 C45 19 47.5 22 47.5 25.5 C47.5 29.5 45 32 41 32 H30 M30 7 V32" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- ESTUDIO wordmark -->
+              <text x="0" y="37.5" font-family="'Inter', system-ui, sans-serif" font-size="7" font-weight="500" letter-spacing="0.2em" fill="#777">ESTUDIO</text>
+            </svg>
+          </div>
+          <p class="footer-tagline">
+            Estudio para producción de fotografía y video. Espacio profesional con fondo infinito,
+            capacidad Multi-Set y acceso vehicular al set. Monte Grande, Buenos Aires.
+          </p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <div class="footer-col-title">El Espacio</div>
+            <ul>
+              <li><a href="#estudios">Fondo Infinito</a></li>
+              <li><a href="#estudios">Capacidad Multi-Set</a></li>
+              <li><a href="#estudios">Acceso Vehicular</a></li>
+              <li><a href="#servicios">Fotografía</a></li>
+              <li><a href="#servicios">Video & Film</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Servicios</div>
+            <ul>
+              <li><a href="#servicios">Producción Foto</a></li>
+              <li><a href="#servicios">Producción Video</a></li>
+              <li><a href="#servicios">Equipamiento</a></li>
+              <li><a href="#servicios">Post-Producción</a></li>
+              <li><a href="#precios">Precios y Reservas</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Contacto</div>
+            <ul>
+              <li><a href="mailto:estudioab.ok@gmail.com">estudioab.ok@gmail.com</a></li>
+              <li><a href="https://wa.me/5491168493300">+54 9 11 6849-3300</a></li>
+              <li><a href="#">Alejo Ortega 147, Monte Grande</a></li>
+              <li><a href="https://www.instagram.com/estudioab.ok/" target="_blank">Instagram</a></li>
+              <li><a href="https://www.threads.com/@estudioab.ok" target="_blank">Threads</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2024 AB Estudio. Todos los derechos reservados.</span>
+        <div class="footer-legal">
+          <a href="#">Términos</a>
+          <a href="#">Privacidad</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ══ SCRIPTS ══════════════════════════════════════════════ -->
+  <script>
+    // ── Gallery Carousel ──────────────────────────────────────
+    (function () {
+      const slides    = document.querySelectorAll('.gallery-slide');
+      const dots      = document.querySelectorAll('.gallery-dot');
+      const progress  = document.getElementById('gProgress');
+      const label     = document.getElementById('gLabel');
+      const carousel  = document.getElementById('gCarousel');
+      const TOTAL     = slides.length;
+      let current     = 0;
+      let busy        = false;
+      let timer       = null;
+      const DELAY     = 5500;
+
+      function goTo(n) {
+        if (busy || n === current) return;
+        busy = true;
+        slides[current].classList.remove('active');
+        current = ((n % TOTAL) + TOTAL) % TOTAL;
+        slides[current].classList.add('active');
+        // UI updates
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+        if (progress) progress.style.width = ((current + 1) / TOTAL * 100) + '%';
+        if (label)    label.textContent = String(current + 1).padStart(2, '0') + ' / 0' + TOTAL;
+        setTimeout(() => { busy = false; }, 700);
+        resetTimer();
+      }
+
+      window.gNext  = () => goTo(current + 1);
+      window.gPrev  = () => goTo(current - 1);
+      window.gGoto  = (n) => goTo(n);
+
+      function resetTimer() {
+        clearInterval(timer);
+        timer = setInterval(gNext, DELAY);
+      }
+
+      // Pause on hover
+      if (carousel) {
+        carousel.addEventListener('mouseenter', () => clearInterval(timer));
+        carousel.addEventListener('mouseleave', resetTimer);
+      }
+
+      // Swipe support
+      let touchX = 0;
+      if (carousel) {
+        carousel.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+        carousel.addEventListener('touchend',   e => {
+          const diff = touchX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 40) diff > 0 ? gNext() : gPrev();
+        });
+      }
+
+      resetTimer();
+    })();
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
